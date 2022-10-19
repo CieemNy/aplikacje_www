@@ -6,7 +6,7 @@ class Druzyna(models.Model):
     kraj = models.CharField(max_length=2, validators=[RegexValidator('^[A-Z]', 'Tylko duże litery')])
     nazwa = models.CharField(max_length=255)
     def __str__(self):
-        return self.kraj
+        return self.nazwa + ' ('+self.kraj+')'
 class Osoba(models.Model):
     imie = models.CharField(max_length=255)
     nazwisko = models.CharField(max_length=255)

@@ -5,6 +5,7 @@ class OsobaAdmin(admin.ModelAdmin):
     list_display = ['imie', 'nazwisko', 'miesiac_urodzenia', 'data_dodania', 'kraj']
 class DruzynaAdmin(admin.ModelAdmin):
     list_display = ['nazwa', 'kraj']
+    list_filter = ['nazwa']
 
 admin.site.register(Question)
 admin.site.register(Osoba, OsobaAdmin)
