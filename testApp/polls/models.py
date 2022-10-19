@@ -1,13 +1,42 @@
 import datetime
+
+from django.core.validators import RegexValidator
 from django.db import models
-from django.utils import timezone
+class Druzyna(models.Model):
+    kraj = models.CharField(max_length=2, validators=[RegexValidator('^[A-Z]', 'Tylko duże litery')])
+    nazwa = models.CharField(max_length=255)
+    def __str__(self):
+        return self.nazwa + ' ('+self.kraj+')'
+class Osoba(models.Model):
+    imie = models.CharField(max_length=255)
+    nazwisko = models.CharField(max_length=255)
+    class Miesiac(models.IntegerChoices):
+        STYCZEN = 1
+        LUTY = 2
+        MARZEC = 3
+        KWIECIEN = 4
+        MAJ = 5
+        CZERWIEC = 6
+        LIPIEC = 7
+        SIERPIEN = 8
+        WRZESIEN = 9
+        PAZDZIERNIK = 10
+        LISTOPAD = 11
+        GRUDZIEN = 12
+
+    miesiac_urodzenia = models.IntegerField(choices=Miesiac.choices)
+    data_dodania = models.DateField(default=datetime.date.today)
+    kraj = models.ForeignKey('Druzyna', on_delete=models.CASCADE, null=True)
+    class Meta:
+        ordering = ['nazwisko']
+    def __str__(self):
+        return self.imie + ' ' + self.nazwisko
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
     def __str__(self):
         return self.question_text
-    def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 
 class Choice(models.Model):
