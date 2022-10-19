@@ -1,4 +1,5 @@
 import datetime
+from datetime import date
 from django.db import models
 from django.utils import timezone
 
@@ -20,6 +21,7 @@ class Osoba(models.Model):
         ('12', 'grudzień'),
     )
     miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=MIESIAC_URODZENIA[0][0])
+    data_dodania = models.DateField(default=datetime.date.today)
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
