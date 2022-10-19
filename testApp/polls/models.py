@@ -1,26 +1,25 @@
 import datetime
-from datetime import date
 from django.db import models
 from django.utils import timezone
 
 class Osoba(models.Model):
     imie = models.CharField(max_length=255)
     nazwisko = models.CharField(max_length=255)
-    MIESIAC_URODZENIA = (
-        ('1', 'styczeń'),
-        ('2', 'luty'),
-        ('3', 'marzec'),
-        ('4', 'kwiecień'),
-        ('5', 'maj'),
-        ('6', 'czerwiec'),
-        ('7', 'lipiec'),
-        ('8', 'sierpień'),
-        ('9', 'wrzesień'),
-        ('10', 'październik'),
-        ('11', 'listopad'),
-        ('12', 'grudzień'),
-    )
-    miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=MIESIAC_URODZENIA[0][0])
+    class Miesiac(models.IntegerChoices):
+        STYCZEN = 1
+        LUTY = 2
+        MARZEC = 3
+        KWIECIEN = 4
+        MAJ = 5
+        CZERWIEC = 6
+        LIPIEC = 7
+        SIERPIEN = 8
+        WRZESIEN = 9
+        PAZDZIERNIK = 10
+        LISTOPAD = 11
+        GRUDZIEN = 12
+
+    miesiac_urodzenia = models.IntegerField(choices=Miesiac.choices)
     data_dodania = models.DateField(default=datetime.date.today)
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
