@@ -21,8 +21,12 @@ class Osoba(models.Model):
 
     miesiac_urodzenia = models.IntegerField(choices=Miesiac.choices)
     data_dodania = models.DateField(default=datetime.date.today)
+
+    class Meta:
+        ordering = ['nazwisko']
     def __str__(self):
         return self.imie + ' ' + self.nazwisko
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
