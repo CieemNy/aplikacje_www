@@ -19,7 +19,7 @@ class Osoba(models.Model):
         ('11', 'listopad'),
         ('12', 'grudzień'),
     )
-    miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA)
+    miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=MIESIAC_URODZENIA[0][0])
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
