@@ -5,8 +5,8 @@ class OsobaSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     imie = serializers.CharField(required=True)
     nazwisko = serializers.CharField(required=True)
-    miesiac_urodzenia = serializers.ChoiceField(choices=MIESIAC_URODZENIA.choices, default=MIESIAC_URODZENIA.choices[0][0])
-    kraj = serializers.PrimaryKeyRelatedField(queryset=Druzyna.objects.all())
+    miesiac_urodzenia = serializers.ChoiceField(choices=MIESIAC_URODZENIA, default=MIESIAC_URODZENIA[0][0])
+    kraj = serializers.PrimaryKeyRelatedField(queryset=Druzyna.objects.all(), allow_null=True)
 
     def create(self, validated_data):
         return Osoba.objects.create(**validated_data)
