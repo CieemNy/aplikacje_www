@@ -1,6 +1,8 @@
 import datetime
 from django.core.validators import RegexValidator
 from django.db import models
+from datetime import date
+
 
 MIESIAC_URODZENIA = (
         ('1', 'styczeń'),
@@ -29,7 +31,7 @@ class Druzyna(models.Model):
 class Osoba(models.Model):
     imie = models.CharField(max_length=255)
     nazwisko = models.CharField(max_length=255)
-    miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=MIESIAC_URODZENIA[0][0])
+    miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=date.today().month)
     data_dodania = models.DateField(default=datetime.date.today)
     kraj = models.ForeignKey('Druzyna', on_delete=models.CASCADE, null=True)
 
