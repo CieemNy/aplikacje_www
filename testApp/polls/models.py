@@ -32,6 +32,7 @@ class Osoba(models.Model):
     imie = models.CharField(max_length=255)
     nazwisko = models.CharField(max_length=255)
     miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=date.today().month)
+    miesiac_dodania = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=date.today().month)
     data_dodania = models.DateField(default=datetime.date.today)
     kraj = models.ForeignKey('Druzyna', on_delete=models.CASCADE, null=True)
 
