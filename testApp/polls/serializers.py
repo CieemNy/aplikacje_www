@@ -23,7 +23,7 @@ class OsobaSerializer(serializers.Serializer):
         return instance
 
     def validate_miesiac_dodania(self, value):
-        if value > date.today().month:
+        if value > str(date.today().month):
             raise serializers.ValidationError(
                 "Miesiac dodania, nie moze byc przyszly!",
             )
