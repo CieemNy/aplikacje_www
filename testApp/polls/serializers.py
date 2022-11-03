@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Osoba, Druzyna, MIESIAC_URODZENIA, Question, Choice
-from django.core.validators import RegexValidator
-
+from datetime import date
 
 class OsobaSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
@@ -23,6 +22,12 @@ class OsobaSerializer(serializers.Serializer):
         instance.save()
         return instance
 
+    def validate_miesiac_dodania(self, value):
+        if value > date.today().month:
+            raise serializers.ValidationError(
+                "Miesiac dodania, nie moze byc przyszly!",
+            )
+        return value
 
 class DruzynaSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
