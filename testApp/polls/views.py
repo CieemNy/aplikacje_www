@@ -5,12 +5,18 @@ from .models import Osoba
 from .serializers import OsobaSerializer
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def osoba_list(request):
     if request.method == 'GET':
         osoby = Osoba.objects.all()
         serializer = OsobaSerializer(osoby, many=True)
         return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = OsobaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def osoba_detail(request, pk):
