@@ -29,6 +29,13 @@ class OsobaSerializer(serializers.Serializer):
             )
         return value
 
+    def validate_imie(self, value):
+        if not value.isalpha():
+            raise serializers.ValidationError(
+                "Imie musi sie składać tlyko z liter!",
+            )
+        return value
+
 class DruzynaSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     kraj = serializers.CharField(required=True)
