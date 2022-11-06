@@ -7,7 +7,7 @@ from .serializers import OsobaSerializer, DruzynaSerializer
 
 
 class OsobaList(APIView):
-    def get(self):
+    def get(self, request, format=None):
         osoby = Osoba.objects.all()
         serializer = OsobaSerializer(osoby, many=True)
         return Response(serializer.data)
