@@ -20,11 +20,6 @@ def osoba_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def osoba_detail(request, pk):
-    """
-        :param request: obiekt DRF Request
-        :param pk: id obiektu Person
-        :return: Response (with status and/or object/s data)
-    """
     try:
         osoba = Osoba.objects.get(pk=pk)
     except Osoba.DoesNotExist:
@@ -44,3 +39,11 @@ def osoba_detail(request, pk):
     elif request.method == 'DELETE':
         osoba.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def osoba_znak(request, znak):
+    if request.method == 'GET':
+        osoba = Osoba.objects.all().filter(imie__icontains=znak)
+        serializer = OsobaSerializer(osoba, many=True)
+        return Response(serializer.data)
