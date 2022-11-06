@@ -39,6 +39,11 @@ class OsobaDetail(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def delete(self, request, pk, format=None):
+        osoba = self.get_oject(pk)
+        osoba.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 # @api_view(['GET', 'POST'])
 # def osoba_list(request):
