@@ -44,6 +44,11 @@ class OsobaDetail(APIView):
         osoba.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class OsobaSignSearch(APIView):
+    def get(self, request, znak, format=None):
+        osoby = Osoba.objects.all().filter(imie__icontains=znak)
+        serializer = OsobaSerializer(osoby, many=True)
+        return Response(serializer.data)
 
 # @api_view(['GET', 'POST'])
 # def osoba_list(request):
