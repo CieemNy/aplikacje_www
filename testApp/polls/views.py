@@ -1,3 +1,4 @@
+from django.http import Http404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -18,7 +19,17 @@ class OsobaList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class OsobaDetail(APIView):
+    def get_oject(self, pk):
+        try:
+            return Osoba.objects.get(pk=pk)
+        except Osoba.DoesNotExist:
+            raise Http404
 
+    def get(self, request, pk, format=None):
+        osoba = self.get_oject(pk)
+        serializer = OsobaSerializer(osoba)
+        return Response(serializer.data)
 
 # @api_view(['GET', 'POST'])
 # def osoba_list(request):
