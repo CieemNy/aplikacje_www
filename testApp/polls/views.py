@@ -31,6 +31,15 @@ class OsobaDetail(APIView):
         serializer = OsobaSerializer(osoba)
         return Response(serializer.data)
 
+    def put(self, request, pk, format=None):
+        osoba = self.get_oject(pk)
+        serializer = OsobaSerializer(osoba, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 # @api_view(['GET', 'POST'])
 # def osoba_list(request):
 #     if request.method == 'GET':
