@@ -81,6 +81,8 @@ def osoba_detail(request, pk):
 
 
 @api_view(['PUT', 'DELETE'])
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def osoba_update_delete(request, pk):
     try:
         osoba = Osoba.objects.get(pk=pk)
