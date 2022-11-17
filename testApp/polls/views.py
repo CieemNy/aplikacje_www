@@ -22,7 +22,7 @@ def osoba_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET'])
 def osoba_detail(request, pk):
     try:
         osoba = Osoba.objects.get(pk=pk)
