@@ -9,7 +9,6 @@ from rest_framework.views import APIView
 from .models import Osoba, Druzyna
 from .serializers import OsobaSerializer, DruzynaSerializer
 
-
 # class OsobaList(APIView):
 #     def get(self, request, format=None):
 #         osoby = Osoba.objects.all()

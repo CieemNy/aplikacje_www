@@ -29,6 +29,7 @@ class Druzyna(models.Model):
 
 
 class Osoba(models.Model):
+
     imie = models.CharField(max_length=255, validators=[RegexValidator('^[a-zA-Z]+$', 'Tylko litery')])
     nazwisko = models.CharField(max_length=255)
     miesiac_urodzenia = models.CharField(max_length=255, choices=MIESIAC_URODZENIA, default=date.today().month)
@@ -58,6 +59,7 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.choice_text
+
 
 
 class AuthGroup(models.Model):
