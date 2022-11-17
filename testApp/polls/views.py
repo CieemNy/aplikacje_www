@@ -34,6 +34,8 @@ def osoba_detail(request, pk):
         return Response(serializer.data)
 
 
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 @api_view(['PUT'])
 def osoba_edit(request, pk):
     try:
@@ -48,6 +50,8 @@ def osoba_edit(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@authentication_classes([SessionAuthentication, BasicAuthentication])
+@permission_classes([IsAuthenticated])
 @api_view(['DELETE'])
 def osoba_delete(request, pk):
     try:
