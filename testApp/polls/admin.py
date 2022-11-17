@@ -8,7 +8,7 @@ class OsobaAdmin(admin.ModelAdmin):
 
 
 class DruzynaAdmin(admin.ModelAdmin):
-    list_display = ['nazwa', 'kraj']
+    list_display = ['id', 'nazwa', 'kraj']
     list_filter = ['nazwa']
 
 

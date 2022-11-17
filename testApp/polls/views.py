@@ -100,3 +100,12 @@ def druzyna_detail(request, pk):
     elif request.method == 'DELETE':
         druzyna.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def druzyna_czlonkowie(request, pk):
+    if request.method == 'GET':
+        druzyna = Druzyna.objects.get(pk=pk)
+        osoba = Osoba.objects.filter(kraj=druzyna)
+        serializer = OsobaSerializer(osoba, many=True)
+        return Response(serializer.data)

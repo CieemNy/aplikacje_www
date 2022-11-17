@@ -9,4 +9,5 @@ urlpatterns = [
     path('osoby/<str:znak>/', views.osoba_znak),
     path('druzyny/', views.druzyna_list),
     path('druzyny/<int:pk>/', views.druzyna_detail),
+    path('druzyny/<int:pk>/czlonkowie', views.druzyna_czlonkowie),
 ]
